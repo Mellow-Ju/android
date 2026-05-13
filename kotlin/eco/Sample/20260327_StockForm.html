@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    <form>
+      <label for="stockName">종목명:</label>
+      <input type="text" id="stockName" name="stockName"><br><br>
+
+      <label for="type">해외/국내:</label>
+      <select id="type" name="type">
+        <option value="해외">해외</option>
+        <option value="국내">국내</option>
+      </select><br><br>
+
+      <label for="ticker">Ticker:</label>
+      <input type="text" id="ticker" name="ticker"><br><br>
+      
+      <input type="button" value="입력" onclick="submitForm()">
+    </form>
+
+    <script>
+      function submitForm() {
+        var stockName = document.getElementById('stockName').value;
+        var type = document.getElementById('type').value;
+        var ticker = document.getElementById('ticker').value;
+        google.script.run.withSuccessHandler(closeDialog)
+                         .addStock(stockName, type, ticker);
+      }
+
+      function closeDialog() {
+        google.script.host.close();
+      }
+    </script>
+  </body>
+</html>
